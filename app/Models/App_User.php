@@ -9,8 +9,8 @@ class App_User extends Model
 {
     public $guarded = [];
 
-    public function Participation_ticker(){
-        return $this->hasMany(Participation_ticker::class);
+    public function Participation_Ticker_Detail(){
+        return $this->hasMany(Participation_Ticket_Detail::class);
     }
 
     public function Department(){

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\BookRoom;
+namespace App\Http\Requests\Forgot;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookRequest extends FormRequest
+class ResetpasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,17 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'datebook'=>'required|date',
-            'hourbook'=>'required',
-            'meetRoom'=>'required|min:1|'
+            'emailResetPassword'=>'required|email',
+            'newpassword'=>'required|min:6',
+            'configpassword'=>'required|min:6'
         ];
     }
 
     public function messages()
     {
         return [
-            'required'=>'Không được để trống',
-            'date'=>'Hãy chọn đúng ngày'
+            'required' => 'Không được bỏ trống',
+            'min'=>'Mật khẩu phải lớn hơn 6'
         ];
     }
 }

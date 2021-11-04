@@ -21,7 +21,7 @@ class mailMiddle
         $user = App_User::where('email',$email)->first();
         if(empty($user)){
             $request->session()->flash('error','Email này chưa đăng kí người dùng');
-            return redirect()->route('forgot');
+            return redirect()->route('forgot.get');
         }
         return $next($request);
     }

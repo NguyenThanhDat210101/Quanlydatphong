@@ -15,6 +15,18 @@ We get it, stuff happens. Just enter your email address below and well send you 
         Reset Password
     </button>
 </form>
+@if (!empty($error))
+<hr>
+<div class="alert alert-danger" role="alert">
+    {{$error}}
+</div>
+@endif
+@if (!empty($message))
+<hr>
+<div class="alert alert-success" role="alert">
+    {{$message}}
+</div>
+@endif
 <hr>
 <div class="text-center">
     <a class="small" href="{{ route('register.get') }}">Register</a>

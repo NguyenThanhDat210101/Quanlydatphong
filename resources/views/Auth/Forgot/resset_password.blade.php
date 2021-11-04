@@ -22,25 +22,43 @@
                     <label for="">Email</label>
                     <input type="text"
                       class="form-control" name="emailResetPassword" id="" value="{{$email}}" aria-describedby="helpId" readonly placeholder="">
-                  </div>
+                      <small id="helpId" class="form-text text-danger">
+                        @error('emailResetPassword')
+                            {{$message}}
+                        @enderror
+                    </small>
+                    </div>
 
                   <div class="form-group">
                     <label for="">New Password</label>
                     <input type="password"
                       class="form-control" name="newpassword" id="" aria-describedby="helpId" placeholder="New Password">
-                  </div>
+                      <small id="helpId" class="form-text text-danger">
+                        @error('newpassword')
+                            {{$message}}
+                        @enderror
+                    </small>
+                    </div>
 
                   <div class="form-group">
                     <label for="">Config Password</label>
                     <input type="password"
                       class="form-control" name="configpassword" id="" aria-describedby="helpId" placeholder="Config Password">
-                    <small id="helpId" class="form-text text-muted">Help text</small>
+                    <small id="helpId" class="form-text text-danger">
+                        @error('configpassword')
+                            {{$message}}
+                        @enderror
+                    </small>
                   </div>
                   <button class="btn btn-dark">Đổi Mật Khẩu</button>
              </form>
             </div>
-            <div class="card-footer text-muted">
-                Footer
+            <div class="card-footer">
+                @if (!empty($error))
+                    <div class="alert alert-danger text-center">
+                        {{$error}}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

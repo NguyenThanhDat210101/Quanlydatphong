@@ -29,9 +29,15 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('book-room')}}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Book Room</span></a>
+            <span>Book Room</span>
+        </a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('manager.book.room')}}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Manager Book Room</span>
+        </a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 
