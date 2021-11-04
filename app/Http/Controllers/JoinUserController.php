@@ -7,6 +7,7 @@ use App\Models\Meet_room;
 use App\Models\Participation_ticker;
 use App\Models\Participation_Ticket_Detail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class JoinUserController extends Controller
 {
@@ -22,12 +23,19 @@ class JoinUserController extends Controller
     }
     public function joinUser(Request $request){
         $user = $request->input('usersBook');
-           for ($i = 0; $i < count($user); $i++) {
-            Participation_Ticket_Detail::create([
-                'user_id'=>$request->input('usersBook')[$i],
-                'ticketid'=>$request->input('idTicket')
-            ]);
-        }
+            for ($i = 0; $i < count($user); $i++) {
+                $getUsers = explode('?',$user[$i]);
+                Participation_Ticket_Detail::create([
+                    'user_id'=>$getUsers[0],
+                    'ticketid'=>$request->input('idTicket')
+                ]);
+                $getUser = App_User::find($getUsers[0]);
+                Mail::send('BookRoom.message', ['name'=>$getUser->name], function ($message) use($getUsers) {
+                    $message->to($getUsers[1]);
+                    $message->subject('Thông báo họp');
+                });
+
+            }
         return redirect()->route('manager.book.room');
     }
 

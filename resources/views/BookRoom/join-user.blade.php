@@ -38,7 +38,7 @@
                                     <label for="my-select">Thêm Người Tham Gia</label>
                                     <select id="my-select" class="form-control" name="usersBook[]" multiple>
                                         @foreach ($getUser as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                            <option value="{{$item->id.'?'.$item->email}}">{{$item->name}}</option>
                                         @endforeach
                                     </select>
                                     <small id="helpId" class="form-text text-danger">
