@@ -25,7 +25,7 @@
                         @foreach ($allBook as $item)
                         <tr>
 
-                            <td scope="row"><img src="../images/{{$item->imageroom}}" alt="" width="50px"></td>
+                            <td scope="row"><img src="../images/{{$item->imageroom}}" alt="" width="70px"></td>
                             <td>{{$item->nameroom}}</td>
                             <td>{{date("d-m-Y H:i", strtotime($item->book_date))}}</td>
                             <td>{{date("d-m-Y H:i", strtotime($item->start_date))}}</td>
@@ -45,6 +45,7 @@
                         @endforeach
                     </tbody>
                 </table>
+
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end">
                       <li class="page-item">

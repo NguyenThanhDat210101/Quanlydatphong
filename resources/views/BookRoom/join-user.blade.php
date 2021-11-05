@@ -1,5 +1,5 @@
 @extends('main')
-@section('namePage','Meet Room')
+@section('namePage','Join User')
 @section('content')
 <div class="row">
     {{-- Crud --}}
@@ -8,7 +8,7 @@
            <!-- Circle Buttons -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary">Book Meet Room</h6>
+                   <h6 class="m-0 font-weight-bold text-primary">Join User</h6>
                </div>
                <div class="card-body">
                    <form action="{{ route('join.user.post') }}" method="post" >

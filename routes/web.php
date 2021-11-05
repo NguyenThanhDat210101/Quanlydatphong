@@ -39,7 +39,7 @@ Route::get('/login','App\Http\Controllers\AuthController@login')
 ->middleware('inLogin')
 ->name('login.get');
 Route::get('register','App\Http\Controllers\AuthController@register')
-->middleware('inLogin')
+->middleware('inLogin','registerMiddle')
 ->name('register.get');
 Route::get('forgot','App\Http\Controllers\ResetPasswordController@forgot')
 ->middleware('inLogin')
@@ -94,7 +94,7 @@ Route::get('manager-book-room', 'App\Http\Controllers\BookroomController@viewMan
 ->middleware('isLogin')
 ->name('manager.book.room');
 Route::post('book-room-post','App\Http\Controllers\BookroomController@bookRoom')
-->middleware('isLogin')
+->middleware('isLogin','BookdateMiddle')
 ->name('book.room.post');
 Route::get('cancel-manager-book-room/{id}', 'App\Http\Controllers\BookroomController@deletes')
 ->middleware('isLogin')
@@ -106,6 +106,19 @@ Route::post('add-user','App\Http\Controllers\JoinUserController@joinUser')
 ->middleware('isLogin')
 ->name('join.user.post');
 Route::get('is-join-user/{id}','App\Http\Controllers\JoinUserController@viewNumberJoin')
+->middleware('isLogin')
 ->name('is.join.user');
 Route::get('delete-join-user/{id}','App\Http\Controllers\JoinUserController@deleteUserJoin')
+->middleware('isLogin')
 ->name('delete.join.user');
+
+//profile
+Route::get('profile','App\Http\Controllers\ProfileController@isProfile')
+->middleware('isLogin')
+->name('profile.get');
+Route::post('updateprofile','App\Http\Controllers\ProfileController@updateProfile')
+->middleware('isLogin')
+->name('profile.post');
+Route::post('change-password','App\Http\Controllers\ProfileController@changePassword')
+->middleware('isLogin','ConfigchangeMiddle')
+->name('change.pass.post');

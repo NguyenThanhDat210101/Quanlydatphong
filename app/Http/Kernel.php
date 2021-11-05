@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\BookroomMiddle;
+use App\Http\Middleware\ChangepasswordMiddle;
 use App\Http\Middleware\inLoginMiddle;
 use App\Http\Middleware\isLoginMiddleware;
 use App\Http\Middleware\mailMiddle;
@@ -73,6 +74,8 @@ class Kernel extends HttpKernel
         'isLogin'=> isLoginMiddleware::class,
         'mailMiddle'=> mailMiddle::class,
         'isConfigPassword'=> isResetPasswordMiddleware::class,
-        'inLogin'=> inLoginMiddle::class
+        'inLogin'=> inLoginMiddle::class,
+        'BookdateMiddle'=>BookroomMiddle::class,
+        'ConfigchangeMiddle'=>ChangepasswordMiddle::class,
     ];
 }

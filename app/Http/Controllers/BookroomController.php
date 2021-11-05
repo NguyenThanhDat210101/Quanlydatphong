@@ -15,10 +15,11 @@ class BookroomController extends Controller
 {
     public function index(Request $request){
         $meet = Meet_room::all();
-        $user = App_User::all();
+        $message = $request->session()->get('messError');
         return view('BookRoom.book')
                 ->with('getMeet',$meet)
-                ->with('getUser',$user);
+                ->with('message',$message);
+
     }
 
     public function viewManager(){
@@ -34,7 +35,8 @@ class BookroomController extends Controller
         $meet = $request->input('meetRoom');
         $array = explode('?',$meet);
         $date = new DateTime('Asia/Ho_Chi_Minh');
-        $hourStart =  explode('?',$request->input('hourbook'));
+        $hourbook = $request->input('hourbook');
+        $hourStart =  explode('?',$hourbook);
         $startHour = $hourStart[0];
         $endHour = $hourStart[1];
         $startbook = $request->input('datebook').' '. $startHour;

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class MeetRoomController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $meet = Meet_room::paginate(5);
         $message = $request->session()->get('message');
         return view('MeetRoom.meet_room')
@@ -16,7 +17,8 @@ class MeetRoomController extends Controller
                 ->with('messagesuccess',$message);
     }
 
-     public function inserts(InsertMeetRequest $request){
+     public function inserts(InsertMeetRequest $request)
+     {
          $name = $request->input('meetName');
          $address = $request->input('meetAddress');
          $seats = $request->input('meetSeats');
@@ -42,7 +44,8 @@ class MeetRoomController extends Controller
          return redirect()->route('meetroom.get');
      }
 
-     public function deletes($id){
+     public function deletes($id)
+     {
         Meet_room::find($id)->delete();
         return redirect()->route('meetroom.get');
     }
@@ -55,7 +58,8 @@ class MeetRoomController extends Controller
                 ->with('getOneMeet',$getMeet);
     }
 
-    public function updates(InsertMeetRequest $request){
+    public function updates(InsertMeetRequest $request)
+    {
         $name = $request->input('meetName');
         $id = $request->input('meetId');
         $address = $request->input('meetAddress');

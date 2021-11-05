@@ -17,6 +17,7 @@
                             <th>Email</th>
                             <th>Name</th>
                             <th>Phone</th>
+                            <th>Department</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -26,6 +27,7 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->phone}}</td>
+                            <td>{{$item->nameDepartment}}</td>
                         </tr>
                         @endforeach
                     </tbody>

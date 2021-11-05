@@ -1,5 +1,5 @@
 @extends('main')
-@section('namePage','Meet Room')
+@section('namePage','Book Room')
 @section('content')
 <div class="row">
     {{-- Crud --}}
@@ -19,10 +19,10 @@
                             <div class="form-group col-6">
                                 <div class="form-group">
                                 <label for="my-select">Select Meet Room</label>
-                                <select id="my_select_box" class="form-control" name="meetRoom">
-                                    <option value="">Chọn Phòng Họp</option>
+                                <select id="my_select_box" class="form-control"  name="meetRoom">
+                                    <option value="" >Chọn Phòng Họp</option>
                                    @foreach ($getMeet as $item)
-                                   <option  value="../images/{{$item->image}}?{{$item->id}}">{{$item->name}}</option>
+                                   <option value="../images/{{$item->image}}?{{$item->id}}">{{$item->name}}</option>
                                      {{-- <option value="{{$item->id}}" >{{$item->name}} </option> --}}
                                    @endforeach
                                 </select>
@@ -45,9 +45,9 @@
                                  @enderror
                             </small>
                                 {{-- radio --}}
-                                <div class="btn-group-toggle"  style="padding: 2px;margin: 2px" data-toggle="buttons">
+                                <div class="btn-group-toggle"   data-toggle="buttons">
                                     @for ($i = 8; $i < 23; $i++)
-                                        <label class="btn btn-outline-secondary">
+                                        <label class="btn btn-outline-dark" style="margin: 5px">
                                             <input type="radio" value="{{($i==8 || $i==9)?'0'.$i:$i}}:00?{{($i+1==9)?'0'.$i+1:$i+1}}:00" name="hourbook" id="{{$i}}" > {{($i==8 || $i==9)?'0'.$i:$i}}:00 - {{($i+1==9)?'0'.$i+1:$i+1}}:00
                                         </label>
                                     @endfor
@@ -57,10 +57,16 @@
                                         {{$message}}
                                      @enderror
                                 </small>
+                                @if (!empty($message))
+                                <h3 id="helpId" class="form-text text-danger text-center alert alert-danger">
+                                    {{$message}}
+                                </h3>
+                                @endif
+
                                 {{-- end radio --}}
                                 </div>
                             <br>
-                            <button class="btn btn-success">Book Room</button>
+                            <button class="btn btn-success ">Book Room</button>
                         </div>
 
                     </div>

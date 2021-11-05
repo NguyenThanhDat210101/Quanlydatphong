@@ -1,5 +1,5 @@
 @extends('main')
-@section('namePage','Manager Book Room')
+@section('namePage','Number User')
 @section('content')
 <div class="row">
     {{-- Crud --}}
@@ -7,7 +7,9 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Manager Book Room</h6>
+                <h6 class="m-0 font-weight-bold text-primary">                    <ul class="pagination justify-content-lg-start">
+                    <a href="{{url()->previous()}}" class="btn btn-outline-primary "><i class="fas fa-backspace "></i> </a>
+                </ul></h6>
             </div>
             <div class="card-body">
                 <table class="table table-bordered text-center">
@@ -15,6 +17,7 @@
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
+                            <th>Number Phone</th>
                             <th>Department</th>
                             <th></th>
                         </tr>
@@ -25,6 +28,7 @@
 
                             <td scope="row"><img src="../images/{{$item->image}}" alt="" width="50px"></td>
                             <td>{{$item->name}}</td>
+                            <td>{{$item->phone}}</td>
                             <td>{{$item->departmentname}}</td>
                             <td>
                                 <a style="text-decoration: none" href="{{ route('delete.join.user', ['id'=>$item->idticketdetail]) }}">
@@ -35,6 +39,7 @@
                         @endforeach
                     </tbody>
                 </table>
+
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end">
                       <li class="page-item">

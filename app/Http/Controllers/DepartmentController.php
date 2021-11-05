@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $department = Department::paginate(5);
         $message = $request->session()->get('message');
         return view('Department.department')
@@ -16,7 +17,8 @@ class DepartmentController extends Controller
                 ->with('messagesuccess',$message);
     }
 
-    public function inserts(InsertRequest $request){
+    public function inserts(InsertRequest $request)
+    {
         $name = $request->input('nameDepartment');
         Department::create([
             'name'=>$name,
@@ -26,7 +28,8 @@ class DepartmentController extends Controller
         return redirect()->route('department.get');
     }
 
-    public function edits($id){
+    public function edits($id)
+    {
         $getDepart =  Department::find($id);
         $department = Department::paginate(5);
         return view('Department.edit-department')
@@ -34,7 +37,8 @@ class DepartmentController extends Controller
                     ->with('department',$department);;
     }
 
-    public function updates(Request $request){
+    public function updates(Request $request)
+    {
         $name = $request->input('nameEditDepartment');
         $id = $request->input('idEditDepartment');
         Department::find($id)->update([
@@ -44,7 +48,8 @@ class DepartmentController extends Controller
         return redirect()->route('department.get');
     }
 
-    public function deletes(Request $request,$id){
+    public function deletes(Request $request,$id)
+    {
         Department::find($id)->delete();
         $request->session()->flash('message','Xóa Thành Công');
         return redirect()->route('department.get');

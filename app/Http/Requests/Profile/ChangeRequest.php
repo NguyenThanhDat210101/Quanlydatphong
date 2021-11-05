@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\BookRoom;
+namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookRequest extends FormRequest
+class ChangeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,16 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'datebook'=>'required|date',
-            'hourbook'=>'required',
-            'meetRoom'=>'required|min:1|'
+            'configpassword'=>'required|min:6',
+            'newpassword'=>'required|min:6'
         ];
     }
 
     public function messages()
     {
         return [
-            'required'=>'Không được để trống',
-            'date'=>'Hãy chọn đúng ngày',
-            'hourbook.required'=>'Hãy chon giờ họp'
+            'required'=>'Mật Khẩu Không Hợp Lệ',
+            'min'=>'Mật Khẩu Không Hợp Lệ'
         ];
     }
 }

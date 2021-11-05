@@ -69,7 +69,7 @@ class AuthController extends Controller
         $password = $request->input('passwordLogin');
 
         if(Auth::attempt(['email' => $email, 'password' => $password])){
-            return redirect()->route('book-room');
+            return redirect()->route('manager.book.room');
         }
         else{
             $errorMess = $request->session()->flash('errorMessage','Sai thông tin đăng nhập');
