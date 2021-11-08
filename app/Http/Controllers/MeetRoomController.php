@@ -17,6 +17,21 @@ class MeetRoomController extends Controller
                 ->with('messagesuccess',$message);
     }
 
+    public function search(Request $request)
+    {
+        $name = $request->input('searchname');
+        if(empty($name)){
+            return redirect()->route('meetroom.get');
+        }
+        else{
+            $meet = Meet_room::where('name',"like","%".$name."%")
+            ->paginate(5);
+        }
+
+        return view('MeetRoom.meet_room')
+            ->with('getAllMeet',$meet);
+    }
+
      public function inserts(InsertMeetRequest $request)
      {
          $name = $request->input('meetName');

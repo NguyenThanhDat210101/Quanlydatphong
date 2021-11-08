@@ -1,5 +1,6 @@
 @extends('main')
 @section('namePage','Meet Room')
+@section('search','/searchMeetRoom')
 @section('content')
 <div class="row">
     {{-- Crud --}}
@@ -23,7 +24,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">List Meet Room</h6>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table table-bordered text-center">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -35,13 +36,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($getAllMeet) == 0)
+                        <tr class="text-center text-danger  "><td  colspan="5" ><h2 >Không Tìm Thấy??</h2></td></tr>
+
+                        @endif
                         @foreach ($getAllMeet as $item)
                         <tr>
                             <td scope="row"><img src="../images/{{$item->image}}" width="50px" alt=""></td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->address}}</td>
                             <td>{{$item->seats}}</td>
-                            <td></td>
+
                             <td>
                                 <a style="text-decoration-line: none" href="{{ route('meetroom.edit', ['id'=>$item->id]) }}">
                                     <i class="fa fa-edit btn btn-outline-success"></i>

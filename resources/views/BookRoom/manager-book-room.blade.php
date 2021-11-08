@@ -1,5 +1,6 @@
 @extends('main')
 @section('namePage','Manager Book Room')
+@section('search','/searchTicket')
 @section('content')
 <div class="row">
     {{-- Crud --}}
@@ -13,6 +14,7 @@
                 <table class="table table-bordered text-center">
                     <thead>
                         <tr>
+                            <th>Ticket ID</th>
                             <th>Image</th>
                             <th>Meet Room</th>
                             <th>Book Date</th>
@@ -22,9 +24,13 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
+                        @if (count($allBook) == 0)
+                        <tr class="text-center text-danger  "><td  colspan="5" ><h2 >Không Tìm Thấy??</h2></td></tr>
+
+                        @endif
                         @foreach ($allBook as $item)
                         <tr>
-
+                            <td>{{$item->id}}</td>
                             <td scope="row"><img src="../images/{{$item->imageroom}}" alt="" width="70px"></td>
                             <td>{{$item->nameroom}}</td>
                             <td>{{date("d-m-Y H:i", strtotime($item->book_date))}}</td>

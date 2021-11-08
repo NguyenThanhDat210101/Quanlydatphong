@@ -1,5 +1,6 @@
 @extends('main')
 @section('namePage','Department')
+@section('search','/searchDepartment')
 @section('content')
 <div class="row">
     {{-- Crud --}}
@@ -21,6 +22,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($department) == 0)
+                        <tr class="text-center text-danger  "><td  colspan="5" ><h2 >Không Tìm Thấy??</h2></td></tr>
+
+                        @endif
                         @foreach ($department as $item)
                         <tr>
                             <td scope="row">{{$item->id}}</td>

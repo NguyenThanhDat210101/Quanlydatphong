@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRoom\BookdateRequest;
 use App\Http\Requests\BookRoom\BookRequest;
 use App\Models\App_User;
 use App\Models\Meet_room;
@@ -13,13 +14,24 @@ use Illuminate\Support\Facades\DB;
 
 class BookroomController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $meet = Meet_room::all();
-        $message = $request->session()->get('messError');
-        return view('BookRoom.book')
-                ->with('getMeet',$meet)
-                ->with('message',$message);
+        $meetTable = Meet_room::paginate(6);
 
+        return view('BookRoom.room')
+                ->with('getMeet',$meet)
+                ->with('getMeetTable',$meetTable);
+    }
+
+    public function ViewBook(Request $request,$id){
+        $message = $request->session()->get('messError');
+        $bookdate = Participation_ticker::where('meet_id',$id)
+                                        ->paginate(5);
+
+        return view('BookRoom.book')
+                ->with('bookdate',$bookdate)
+                ->with('meet_id',$id)
+                ->with('message',$message);
     }
 
     public function viewManager(){
@@ -31,9 +43,33 @@ class BookroomController extends Controller
                 ->with('allBook',$allBook);
     }
 
+    public function search(Request $request)
+    {
+        $name = $request->input('searchname');
+        if(empty($name)){
+            return redirect()->route('manager.book.room');
+        }
+        else{
+            $allBook = Participation_ticker::join('meet_rooms','participation_tickers.meet_id','=','meet_rooms.id')
+            ->select('participation_tickers.*','meet_rooms.name as nameroom','meet_rooms.image as imageroom')
+            ->where('meet_rooms.name',"like","%".$name."%")
+            ->paginate(5);
+        }
+
+        return view('BookRoom.manager-book-room')
+        ->with('allBook',$allBook);
+
+    }
+
     public function bookRoom(BookRequest $request){
         $meet = $request->input('meetRoom');
         $array = explode('?',$meet);
+
+        return redirect()->route('book.room.date',['id'=>$array[1]]);
+    }
+
+    public function book(BookdateRequest $request){
+        $meet = $request->input('meetid');
         $date = new DateTime('Asia/Ho_Chi_Minh');
         $hourbook = $request->input('hourbook');
         $hourStart =  explode('?',$hourbook);
@@ -43,7 +79,7 @@ class BookroomController extends Controller
         $endbook = $request->input('datebook').' '. $endHour;
 
         Participation_ticker::create([
-            'meet_id'=>$array[1],
+            'meet_id'=>$meet,
             'book_date'=>$date->format('Y-m-d H:i'),
             'start_date'=>$startbook,
             'end_date'=>$endbook,

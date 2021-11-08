@@ -33,6 +33,9 @@ Route::get('edit-department/{id}','App\Http\Controllers\DepartmentController@edi
 Route::post('update-department','App\Http\Controllers\DepartmentController@updates')
 ->middleware('isLogin')
 ->name('department.update');
+Route::get('searchDepartment','App\Http\Controllers\DepartmentController@search')
+->middleware('isLogin')
+->name('department.search');
 
 //auth-get
 Route::get('/login','App\Http\Controllers\AuthController@login')
@@ -68,7 +71,9 @@ Route::post('reset-password','App\Http\Controllers\ResetPasswordController@reset
 Route::get('/user','App\Http\Controllers\UserController@index')
 ->middleware('isLogin')
 ->name('user.get');
-
+Route::get('searchUser','App\Http\Controllers\UserController@search')
+->middleware('isLogin')
+->name('user.search');
 //meetroom
 Route::get('/meetroom', 'App\Http\Controllers\MeetRoomController@index')
 ->middleware('isLogin')
@@ -85,20 +90,34 @@ Route::get('edit-meetroom/{id}','App\Http\Controllers\MeetRoomController@edits')
 Route::post('update-meetroom','App\Http\Controllers\MeetRoomController@updates')
 ->middleware('isLogin')
 ->name('meetroom.update');
+Route::get('searchMeetRoom','App\Http\Controllers\MeetRoomController@search')
+->middleware('isLogin')
+->name('meetroom.search');
 
 //bookroom
 Route::get('book-room', 'App\Http\Controllers\BookroomController@index')
 ->middleware('isLogin')
 ->name('book-room');
+Route::get('book-room-date/{id}', 'App\Http\Controllers\BookroomController@viewBook')
+->middleware('isLogin')
+->name('book.room.date');
+Route::post('book-room-post','App\Http\Controllers\BookroomController@bookRoom')
+->middleware('isLogin')
+->name('book.room.post');
+Route::post('book-room-date-post','App\Http\Controllers\BookroomController@book')
+->middleware('isLogin','BookdateMiddle')
+->name('book.post');
+
 Route::get('manager-book-room', 'App\Http\Controllers\BookroomController@viewManager')
 ->middleware('isLogin')
 ->name('manager.book.room');
-Route::post('book-room-post','App\Http\Controllers\BookroomController@bookRoom')
-->middleware('isLogin','BookdateMiddle')
-->name('book.room.post');
 Route::get('cancel-manager-book-room/{id}', 'App\Http\Controllers\BookroomController@deletes')
 ->middleware('isLogin')
 ->name('manager.book.room.cancel');
+Route::get('searchTicket','App\Http\Controllers\BookroomController@search')
+->middleware('isLogin')
+->name('ticket.search');
+//join user
 Route::get('join-user/{id}','App\Http\Controllers\JoinUserController@viewJoin')
 ->middleware('isLogin')
 ->name('join.user.get');

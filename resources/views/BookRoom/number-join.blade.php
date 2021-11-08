@@ -23,6 +23,10 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
+                        @if (count($ticketDetail) == 0)
+                        <tr class="text-center text-danger  "><td  colspan="5" ><h2 >Chưa có người tham gia họp phòng này</h2></td></tr>
+
+                        @endif
                         @foreach ($ticketDetail as $item)
                         <tr>
 

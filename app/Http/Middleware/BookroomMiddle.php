@@ -20,15 +20,15 @@ class BookroomMiddle
     {
         $isTrue = true;
 
-        $meet = $request->input('meetRoom');
-        $array = explode('?',$meet);
-        $ticket = Participation_ticker::all();
+        $meet = url()->previous();
+        $array = explode('/',$meet);
+        $ticket = Participation_ticker::where('meet_id',$array[4])->get();
         $hourbook = $request->input('hourbook');
         $hourStart =  explode('?',$hourbook);
         $startHour = $hourStart[0];
         $startbook = $request->input('datebook').' '. $startHour;
         foreach($ticket as $item){
-          if(strtotime($item->start_date)-strtotime($startbook) == 0 && $item->meet_id == $array[1]){
+          if(strtotime($item->start_date)-strtotime($startbook) == 0 ){
               $isTrue = false;
           }
         }
@@ -46,6 +46,7 @@ class BookroomMiddle
             $request->session()->flash('messError','Lịch đó đã có người đặt rồi');
             return redirect()->route('book-room');
         }
+
 
     }
 }

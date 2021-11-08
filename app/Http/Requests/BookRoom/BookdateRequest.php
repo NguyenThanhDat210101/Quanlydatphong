@@ -4,7 +4,7 @@ namespace App\Http\Requests\BookRoom;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookRequest extends FormRequest
+class BookdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,16 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-
-            'meetRoom'=>'required|min:1|'
+            'datebook'=>'required|date',
+            'hourbook'=>'required',
         ];
     }
-
     public function messages()
     {
         return [
-            'required'=>'Hãy chọn phòng họp bạn cần',
-
+            'date'=>'Hãy chọn đúng ngày',
+            'hourbook.required'=>'Hãy chon giờ họp',
+            'datebook.required'=>'Hãy chon ngày họp'
         ];
     }
 }

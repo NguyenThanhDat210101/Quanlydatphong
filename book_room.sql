@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 05, 2021 lúc 10:34 AM
+-- Thời gian đã tạo: Th10 08, 2021 lúc 10:13 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
--- Phiên bản PHP: 8.0.10
+-- Phiên bản PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,7 +48,7 @@ CREATE TABLE `app__users` (
 
 INSERT INTO `app__users` (`id`, `name`, `email`, `phone`, `cmnd`, `image`, `department_Id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Nguyen Thanh Dat', 'nguyenthanhdat210101@gmail.com', '0987654321', '0987655432', 'IMG20200524214233.jpg', 6, NULL, '$2y$10$YFQdO6ZirFjMEgzZpcSvleL9gi.aNB20LJL8FliCtTCvu0cNehFnG', NULL, '2021-11-04 00:21:17', '2021-11-04 00:21:17'),
-(2, 'Phan Huyen', 'gadathethoi99@gmail.com', '0816516400', '987654322', 'Noimage.png', 7, NULL, '$2y$10$3vpzLkDwrsOTywRAji/.Veckos0PPgxC5XUVduxAXVI7LwxMUJAxq', NULL, '2021-11-04 00:21:55', '2021-11-04 00:21:55'),
+(2, 'Phan Huyen Thi', 'gadathethoi99@gmail.com', '0816516400', '987654322', 'COMPUTER.png', 7, NULL, '$2y$10$3vpzLkDwrsOTywRAji/.Veckos0PPgxC5XUVduxAXVI7LwxMUJAxq', NULL, '2021-11-04 00:21:55', '2021-11-08 02:10:25'),
 (3, 'Phan Thị Huyền', 'datntpd03522@fpt.edu.vn', '0941519704', '987654323', 'received_4068654193188614.jpeg', 7, NULL, '$2y$10$lfPZaiKFZ1JgOf5LTi5LXeTdKPMt0IL6gByLBvP16tYwgvDL0IKOq', NULL, '2021-11-04 00:22:36', '2021-11-05 01:46:39');
 
 -- --------------------------------------------------------
@@ -74,7 +74,8 @@ INSERT INTO `departments` (`id`, `name`, `status`, `created_at`, `updated_at`) V
 (2, 'phong ban 102', 1, '2021-11-04 00:20:29', '2021-11-04 19:56:42'),
 (3, 'phong ban103', 1, '2021-11-04 00:20:31', '2021-11-04 19:56:49'),
 (6, 'phong ban 201', 1, '2021-11-04 00:20:41', '2021-11-04 19:57:25'),
-(7, 'Phòng Bàn 204', 1, '2021-11-04 00:20:47', '2021-11-04 19:57:38');
+(7, 'Phòng Bàn 204', 1, '2021-11-04 00:20:47', '2021-11-04 19:57:38'),
+(8, 'phong hop 304 A', 1, '2021-11-08 02:06:34', '2021-11-08 02:06:42');
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,8 @@ CREATE TABLE `meet_rooms` (
 INSERT INTO `meet_rooms` (`id`, `name`, `address`, `status`, `image`, `seats`, `created_at`, `updated_at`) VALUES
 (1, 'Phòng Họp số 2', '137 Nguyễn Thị Thập - Đà Nẵng', 1, 'room.jpg', 156, '2021-11-04 00:23:41', '2021-11-04 00:23:41'),
 (2, 'Phòng Họp số 1', '12 Nguyễn Thị Thập - Đà Nẵng', 1, 'room2.jpg', 42, '2021-11-04 00:23:57', '2021-11-04 00:23:57'),
-(3, 'Phòng Họp số 3', '15 Quang Trung - Đà Nẵng', 1, 'msi.png', 1615, '2021-11-04 00:24:14', '2021-11-04 00:24:14');
+(3, 'Phòng Họp số 3', '15 Quang Trung - Đà Nẵng', 1, 'msi.png', 1615, '2021-11-04 00:24:14', '2021-11-04 00:24:14'),
+(4, 'Phòng Họp số 4 A', '12 -  LÃO BẠNG - Đà Nẵng', 1, 'COMPUTER.png', 1423, '2021-11-08 02:07:15', '2021-11-08 02:07:28');
 
 -- --------------------------------------------------------
 
@@ -143,7 +145,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2021_11_02_082540_create_meet_rooms_table', 1),
 (7, '2021_11_02_085204_create_app__users_table', 1),
 (8, '2021_11_02_090702_create_participation_tickers_table', 1),
-(9, '2021_11_04_070924_create_participation__ticket__details_table', 1);
+(9, '2021_11_04_070924_create_participation__ticket__details_table', 1),
+(12, '2021_11_08_061622_time_book_table', 2);
 
 -- --------------------------------------------------------
 
@@ -167,11 +170,13 @@ CREATE TABLE `participation_tickers` (
 --
 
 INSERT INTO `participation_tickers` (`id`, `meet_id`, `status`, `book_date`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(4, 1, 1, '2021-11-05 08:44:00', '2021-11-20 17:00:00', '2021-11-20 18:00:00', '2021-11-04 18:44:15', '2021-11-04 18:44:15'),
 (6, 2, 1, '2021-11-05 09:46:00', '2021-11-20 17:00:00', '2021-11-20 18:00:00', '2021-11-04 19:46:12', '2021-11-04 19:46:12'),
-(7, 1, 1, '2021-11-05 10:15:00', '2021-11-20 18:00:00', '2021-11-20 19:00:00', '2021-11-04 20:15:56', '2021-11-04 20:15:56'),
 (8, 3, 1, '2021-11-05 16:08:00', '2021-11-20 17:00:00', '2021-11-20 18:00:00', '2021-11-05 02:08:42', '2021-11-05 02:08:42'),
-(9, 2, 1, '2021-11-05 16:31:00', '2021-11-05 17:00:00', '2021-11-05 18:00:00', '2021-11-05 02:31:11', '2021-11-05 02:31:11');
+(10, 3, 1, '2021-11-08 10:37:00', '2021-11-13 17:00:00', '2021-11-13 18:00:00', '2021-11-07 20:37:01', '2021-11-07 20:37:01'),
+(12, 2, 1, '2021-11-08 14:59:00', '2021-11-11 19:00:00', '2021-11-11 20:00:00', '2021-11-08 00:59:45', '2021-11-08 00:59:45'),
+(13, 2, 1, '2021-11-08 15:01:00', '2021-11-20 16:00:00', '2021-11-20 17:00:00', '2021-11-08 01:01:21', '2021-11-08 01:01:21'),
+(14, 2, 1, '2021-11-08 15:11:00', '2021-11-20 18:00:00', '2021-11-20 19:00:00', '2021-11-08 01:11:07', '2021-11-08 01:11:07'),
+(15, 4, 1, '2021-11-08 16:10:00', '2021-11-15 08:00:00', '2021-11-15 09:00:00', '2021-11-08 02:10:55', '2021-11-08 02:10:55');
 
 -- --------------------------------------------------------
 
@@ -192,10 +197,10 @@ CREATE TABLE `participation__ticket__details` (
 --
 
 INSERT INTO `participation__ticket__details` (`id`, `user_id`, `ticketid`, `created_at`, `updated_at`) VALUES
-(16, 1, 4, '2021-11-04 19:53:21', '2021-11-04 19:53:21'),
-(18, 3, 4, '2021-11-04 19:53:29', '2021-11-04 19:53:29'),
 (19, 2, 6, '2021-11-04 20:42:02', '2021-11-04 20:42:02'),
-(20, 3, 6, '2021-11-04 20:42:07', '2021-11-04 20:42:07');
+(20, 3, 6, '2021-11-04 20:42:07', '2021-11-04 20:42:07'),
+(21, 1, 8, '2021-11-08 02:05:22', '2021-11-08 02:05:22'),
+(23, 3, 8, '2021-11-08 02:05:30', '2021-11-08 02:05:30');
 
 -- --------------------------------------------------------
 
@@ -343,7 +348,7 @@ ALTER TABLE `app__users`
 -- AUTO_INCREMENT cho bảng `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -355,25 +360,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `meet_rooms`
 --
 ALTER TABLE `meet_rooms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `participation_tickers`
 --
 ALTER TABLE `participation_tickers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `participation__ticket__details`
 --
 ALTER TABLE `participation__ticket__details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `password_resets`

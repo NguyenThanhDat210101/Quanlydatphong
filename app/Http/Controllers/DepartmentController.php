@@ -17,6 +17,22 @@ class DepartmentController extends Controller
                 ->with('messagesuccess',$message);
     }
 
+    public function search(Request $request)
+    {
+        $name = $request->input('searchname');
+        if(empty($name)){
+            return redirect()->route('department.get');
+        }
+        else{
+            $department = Department::where('name',"like","%".$name."%")
+            ->paginate(5);
+        }
+
+        return view('Department.department')
+            ->with('department',$department);
+
+    }
+
     public function inserts(InsertRequest $request)
     {
         $name = $request->input('nameDepartment');

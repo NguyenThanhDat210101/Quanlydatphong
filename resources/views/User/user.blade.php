@@ -1,5 +1,6 @@
 @extends('main')
 @section('namePage','User')
+@section('search','/searchUser')
 @section('content')
 <div class="row">
     {{-- Crud --}}
