@@ -20,7 +20,7 @@
                                 <div class="form-group">
                                     <label for="">Ngày</label>
                                     <input type="hidden" name="meetid" value="{{ $meet_id }}">
-                                    <input type="date" class="form-control col-7" name="datebook" id="mydate"
+                                    <input type="date" min="<?php echo (new Datetime())->format('Y-m-d') ?>" class="form-control col-7" name="datebook" id="mydate"
                                         aria-describedby="helpId" placeholder="">
                                     <small id="helpId" class="form-text text-danger">
                                         @error('datebook')

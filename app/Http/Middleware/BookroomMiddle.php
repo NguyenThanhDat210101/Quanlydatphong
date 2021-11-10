@@ -26,25 +26,27 @@ class BookroomMiddle
         $hourbook = $request->input('hourbook');
         $hourStart =  explode('?',$hourbook);
         $startHour = $hourStart[0];
-        $startbook = $request->input('datebook').' '. $startHour;
+        $startbook = new DateTime($request->input('datebook').' '. $startHour);
+
         foreach($ticket as $item){
-          if(strtotime($item->start_date)-strtotime($startbook) == 0 ){
+            $check_Start = new DateTime($item->start_date);
+          if($startbook->format('Y-m-d H:i:s') ==$check_Start->format('Y-m-d H:i:s') ){
               $isTrue = false;
           }
         }
         if($isTrue){
             $date = new DateTime('Asia/Ho_Chi_Minh');
-            if(strtotime($date->format('Y-m-d H:i')) - strtotime($startbook) <0){
+            if($date->format('Y-m-d H:i:s') < $startbook->format('Y-m-d H:i:s')){
                 return $next($request);
             }
             else{
                 $request->session()->flash('messError','Ngày bạn đã chọn đã qua rồi');
-                return redirect()->route('book-room');
+                return redirect()->back();
             }
         }
         else{
             $request->session()->flash('messError','Lịch đó đã có người đặt rồi');
-            return redirect()->route('book-room');
+            return redirect()->back();
         }
 
 

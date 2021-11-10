@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <form action="{{ route('department.post') }}" method="post">
-             {{csrf_field()}}
+             @csrf
              <div class="form-group">
                  <input type="hidden"
                    class="form-control" name="idDepartment" id=""  aria-describedby="helpId" placeholder="">
