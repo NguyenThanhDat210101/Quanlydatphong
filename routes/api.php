@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('getAllPartTicket/{id}', 'App\Http\Controllers\Api\particketController@getAll');
 
-
+Route::resource('department', 'App\Http\Controllers\Api\DepartmentRestController');

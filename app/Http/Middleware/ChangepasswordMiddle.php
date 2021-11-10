@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ChangepasswordMiddle
 {
@@ -20,8 +21,8 @@ class ChangepasswordMiddle
         $currentpass = $request->input('currentpassword');
         $newpass = $request->input('newpassword');
         $configpass = $request->input('configpassword');
-        $email = Auth::user();
-        if(Auth::attempt(['email' =>$email->email, 'password' => $currentpass])){
+        $user = Auth::user();
+        if(Hash::check($currentpass, $user->password)){
             if($newpass == $configpass){
                 return $next($request);
             }
