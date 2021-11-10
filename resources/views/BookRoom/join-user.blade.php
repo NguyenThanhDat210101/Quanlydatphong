@@ -15,14 +15,14 @@
                     {{csrf_field()}}
                     <div class="row">
                         <div class="col">
-                            <img id="my_changing_image" src="../images/{{$ticket->imageroom}}" width="300px" height="300px"/>
+                            <img id="my_changing_image" src="../images/{{$ticket->meet_room->image}}" width="300px" height="300px"/>
                             <div class="form-group col-6">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for=""></label>
                                         <input type="hidden" name="idTicket" value="{{$ticket->id}}">
                                         <input type="text"
-                                        class="form-control text-center alert alert-dark" readonly name="nameRoom" value="{{$ticket->nameroom}}" id="" aria-describedby="helpId" placeholder="">
+                                        class="form-control text-center alert alert-dark" readonly name="nameRoom" value="{{$ticket->meet_room->name}}" id="" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-danger">
                                             @error('meetRoom')
                                                 {{$message}}

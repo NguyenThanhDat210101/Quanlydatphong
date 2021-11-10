@@ -14,6 +14,6 @@ class Participation_ticker extends Model
     }
 
     public function Meet_room(){
-        return $this->belongsTo(Meet_room::class);
+        return $this->belongsTo(Meet_room::class,'meet_id','id');
     }
 }

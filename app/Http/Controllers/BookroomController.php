@@ -35,9 +35,7 @@ class BookroomController extends Controller
     }
 
     public function viewManager(){
-        $allBook = Participation_ticker::join('meet_rooms','participation_tickers.meet_id','=','meet_rooms.id')
-        ->select('participation_tickers.*','meet_rooms.name as nameroom','meet_rooms.image as imageroom')
-        ->paginate(5);
+        $allBook = Participation_ticker::paginate(5);
 
         return view('BookRoom.manager-book-room')
                 ->with('allBook',$allBook);
@@ -51,7 +49,6 @@ class BookroomController extends Controller
         }
         else{
             $allBook = Participation_ticker::join('meet_rooms','participation_tickers.meet_id','=','meet_rooms.id')
-            ->select('participation_tickers.*','meet_rooms.name as nameroom','meet_rooms.image as imageroom')
             ->where('meet_rooms.name',"like","%".$name."%")
             ->paginate(5);
         }

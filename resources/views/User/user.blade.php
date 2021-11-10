@@ -28,7 +28,7 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->phone}}</td>
-                            <td>{{$item->nameDepartment}}</td>
+                            <td>{{$item->Department->name}}</td>
                         </tr>
                         @endforeach
                     </tbody>

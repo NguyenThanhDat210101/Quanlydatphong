@@ -14,31 +14,19 @@ class JoinUserController extends Controller
 {
     public function viewJoin($id)
     {
-        $ticket = Participation_ticker::join(
-                                            'meet_rooms',
-                                            'participation_tickers.meet_id',
-                                            '=',
-                                            'meet_rooms.id'
-                                        )
-                                        ->select(
-                                            'participation_tickers.*',
-                                            'meet_rooms.name as nameroom',
-                                            'meet_rooms.image as imageroom'
-                                        )
-                                        ->find($id);
-        // $meet = Meet_room::find($ticket->meet_id);
+        $ticket = Participation_ticker::find($id);
         $allUser = App_User::join(
                                 'participation__ticket__details',
                                 'app__users.id',
                                 '=',
                                 'participation__ticket__details.user_id'
-                            )
+                                )
                             ->join(
                                 'participation_tickers',
                                 'participation_tickers.id',
                                 '=',
                                 'participation__ticket__details.ticketid'
-                            )
+                                )
                             ->where('participation_tickers.id',$id)
                             ->select('app__users.id')
                             ->get();
@@ -70,10 +58,7 @@ class JoinUserController extends Controller
 
     public function viewNumberJoin ($id)
     {
-        $ticket_detail = Participation_Ticket_Detail::join('app__users','user_id','=','app__users.id')
-                        ->join('departments','department_Id','=','departments.id')
-                        ->where('ticketid',$id)
-                        ->select('participation__ticket__details.id as idticketdetail','app__users.*','departments.name as departmentname')
+        $ticket_detail = Participation_Ticket_Detail::where('ticketid',$id)
                         ->paginate(3);
         // return view('BookRoom.number-join')
         //         ->with('getJoin',$ticket_detail);

@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        $user = App_User::join('departments','department_Id','=','departments.id')
-                ->select('app__users.*','departments.name as nameDepartment')
-                ->paginate(5);
+        $user = App_User::paginate(5);
         return view('User.user')
                 ->with('getAllUser',$user);
     }
@@ -22,10 +20,8 @@ class UserController extends Controller
             return redirect()->route('user.get');
         }
         else{
-            $user = App_User::join('departments','department_Id','=','departments.id')
-            ->select('app__users.*','departments.name as nameDepartment')
-            ->where('app__users.name',"like","%".$name."%")
-            ->paginate(5);
+            $user = App_User::where('app__users.name',"like","%".$name."%")
+                            ->paginate(5);
         }
 
         return view('User.user')

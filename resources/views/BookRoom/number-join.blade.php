@@ -30,12 +30,12 @@
                         @foreach ($ticketDetail as $item)
                         <tr>
 
-                            <td scope="row"><img src="../images/{{$item->image}}" alt="" width="50px"></td>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->phone}}</td>
-                            <td>{{$item->departmentname}}</td>
+                            <td scope="row"><img src="../images/{{$item->App_User->image}}" alt="" width="50px"></td>
+                            <td>{{$item->App_User->name}}</td>
+                            <td>{{$item->App_User->phone}}</td>
+                            <td>{{$item->App_User->department->name}}</td>
                             <td>
-                                <a style="text-decoration: none" href="{{ route('delete.join.user', ['id'=>$item->idticketdetail]) }}">
+                                <a style="text-decoration: none" href="{{ route('delete.join.user', ['id'=>$item->id]) }}">
                                     <i class="fa fa-trash-alt btn btn-outline-danger"></i>
                                 </a>
                             </td>

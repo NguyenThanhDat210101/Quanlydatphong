@@ -31,8 +31,8 @@
                         @foreach ($allBook as $item)
                         <tr>
                             <td>{{$item->id}}</td>
-                            <td scope="row"><img src="../images/{{$item->imageroom}}" alt="" width="70px"></td>
-                            <td>{{$item->nameroom}}</td>
+                            <td scope="row"><img src="../images/{{$item->meet_room->image}}" alt="" width="70px"></td>
+                            <td>{{$item->meet_room->name}}</td>
                             <td>{{date("d-m-Y H:i", strtotime($item->book_date))}}</td>
                             <td>{{date("d-m-Y H:i", strtotime($item->start_date))}}</td>
                             <td>{{date("d-m-Y H:i", strtotime($item->end_date))}}</td>
