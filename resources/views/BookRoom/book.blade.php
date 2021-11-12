@@ -106,7 +106,7 @@
         var url = window.location.pathname;
         var meetId = url.split('/')[2];
         $.ajax({
-            url:'http://localhost:8000/api/getAllPartTicket/'+meetId,
+            url:'http://manager-book-room.herokuapp.com/api/getAllPartTicket/'+meetId,
             type: 'GET',
             success:function(e){
                 $('#mydate').change(function() {
@@ -124,6 +124,7 @@
                             else{
                                 time = $('#time').val() +' '+(i) +':00';
                             }
+                            console.log(time);
                             console.log(time +"----"+e[n].start_date);
                             if(e[n].start_date === time+':00'){
                                 $('label.btn.btn-outline-dark.'+i).addClass('disabled');

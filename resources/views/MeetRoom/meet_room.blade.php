@@ -16,7 +16,7 @@
         <div class="col">
             <div class="form-group">
                 <label for="">Name</label>
-                <input type="text"
+                <input type="text" value="{{ old('meetName') }}"
                     class="form-control" name="meetName" id="" aria-describedby="helpId" placeholder="">
                 <small id="helpId" class="form-text text-danger">
                     @error('meetName')
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label for="">Address</label>
-                <input type="text"
+                <input type="text" value="{{ old('meetAddress') }}"
                     class="form-control" name="meetAddress" id="" aria-describedby="helpId" placeholder="">
                 <small id="helpId" class="form-text text-danger">
                     @error('meetAddress')
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
             <label for="">Seats</label>
-            <input type="number"
+            <input type="number" value="{{ old('meetSeats') }}"
                 class="form-control" name="meetSeats" id="" aria-describedby="helpId" placeholder="">
                 <small id="helpId" class="form-text text-danger">
                     @error('meetSeats')

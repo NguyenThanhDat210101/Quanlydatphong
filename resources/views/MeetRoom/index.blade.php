@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             <th>Image</th>
-                            <th>Name</th>
+                            <th >Name</th>
                             <th>Address</th>
                             <th>Seats</th>
                             <th></th>
@@ -42,10 +42,10 @@
                         @endif
                         @foreach ($getAllMeet as $item)
                         <tr>
-                            <td scope="row"><img src="../images/{{$item->image}}" width="50px" alt=""></td>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->address}}</td>
-                            <td>{{$item->seats}}</td>
+                            <td scope="row"><img src="../images/{{$item->image}}" width="90px" alt=""></td>
+                            <td style="width:150px">{{$item->name}}</td>
+                            <td style="width:200px">{{$item->address}}</td>
+                            <td>{{number_format($item->seats)}}</td>
 
                             <td>
                                 <a style="text-decoration-line: none" href="{{ route('meetroom.edit', ['id'=>$item->id]) }}">

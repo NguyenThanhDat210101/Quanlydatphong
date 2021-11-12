@@ -24,11 +24,11 @@ class SignupRequest extends FormRequest
     public function rules()
     {
         return [
-            'emailRegister'=> 'required|email|unique:app__users,email,'.$this->id.'',
+            'emailRegister'=> 'required|email|unique:app__users,email',
             'departmentRegister'=>'required',
             'configPasswordRegister'=>'required|min:6',
             'passwordRegister'=>'required|min:6',
-            'cmndRegister'=>'required|min:9|max:10',
+            'cmndRegister'=>'required|min:9|max:10|unique:app__users,cmnd',
             'phoneRegister'=>'max:10|regex:/(0)[0-9]{9}/',
             'nameRegister'=> 'required|min:6',
             'photoRegister'=>''
@@ -48,6 +48,8 @@ class SignupRequest extends FormRequest
             'phoneRegister.regex'=>'Nhập đúng số điện thoại',
             'phoneRegister.max'=>'Nhập đúng số điện thoại',
             'cmndRegister.min'=>'CMND/SCCCD không đúng',
+            'cmndRegister.unique'=>'CMND/SCCCD đã tồn tại',
         ];
     }
+
 }

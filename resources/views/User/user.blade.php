@@ -27,7 +27,7 @@
                             <td scope="row"><img src="../images/{{$item->image}}" alt="" width="50px"></td>
                             <td>{{$item->email}}</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->phone}}</td>
+                            <td>{{rtrim(chunk_split($item->phone, 3, '-'),'-')}}</td>
                             <td>{{$item->Department->name}}</td>
                         </tr>
                         @endforeach

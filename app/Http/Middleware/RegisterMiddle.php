@@ -16,6 +16,7 @@ class RegisterMiddle
      */
     public function handle(Request $request, Closure $next)
     {
+
         $pass = $request->input('passwordRegister');
         $config = $request->input('configPasswordRegister');
         if($pass == $config){

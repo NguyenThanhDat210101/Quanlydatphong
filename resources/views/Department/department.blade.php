@@ -13,7 +13,7 @@
                  <input type="hidden"
                    class="form-control" name="idDepartment" id=""  aria-describedby="helpId" placeholder="">
                  <label for="">Name</label>
-                 <input type="text"
+                 <input type="text" value="{{ old('nameDepartment') }}"
                    class="form-control" name="nameDepartment" id=""  aria-describedby="helpId" placeholder="">
                  <small id="helpId" class="text-danger form-text">
                      @error('nameDepartment')

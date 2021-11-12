@@ -57,7 +57,7 @@
                                         <tr>
                                             <td scope="row">{{ $item->name }}</td>
                                             <td>{{ $item->address }}</td>
-                                            <td>{{ $item->seats }}</td>
+                                            <td>{{ number_format($item->seats) }}</td>
 
                                         </tr>
                                     @endforeach

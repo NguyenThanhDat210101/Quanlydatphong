@@ -9,7 +9,7 @@
             <input id="my-input" class="d-none" onchange="chooseFile(this)" type="file" name="photoRegister">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control form-control-user" name="nameRegister" id=""
+            <input type="text" class="form-control form-control-user" name="nameRegister" id="" value="{{ old('nameRegister') }}"
                 placeholder="Name">
             <small class="text-danger form-text">
                 @error('nameRegister')
@@ -18,7 +18,7 @@
             </small>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control form-control-user" name="phoneRegister" id=""
+            <input type="text" class="form-control form-control-user" name="phoneRegister" id="" value="{{ old('phoneRegister') }}"
                 placeholder="Phone">
             <small class="text-danger form-text">
                 @error('phoneRegister')
@@ -27,7 +27,7 @@
             </small>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control form-control-user" name="cmndRegister" id=""
+            <input type="text" class="form-control form-control-user" name="cmndRegister" id="" value="{{ old('cmndRegister') }}"
                 placeholder="CMND/SCCCD">
             <small class="text-danger form-text">
                 @error('cmndRegister')
@@ -36,7 +36,7 @@
             </small>
         </div>
         <div class="form-group">
-            <input type="email" class="form-control form-control-user" name="emailRegister" id=""
+            <input type="email" class="form-control form-control-user" name="emailRegister" id="" value="{{ old('emailRegister') }}"
                 placeholder="Email">
             <small class="text-danger form-text">
                 @error('emailRegister')
@@ -47,7 +47,7 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="password" class="form-control form-control-user" name="passwordRegister"
+                <input type="password" class="form-control form-control-user" name="passwordRegister" value="{{ old('passwordRegister') }}"
                     id="exampleInputPassword" placeholder="Password">
                 <small class="text-danger form-text">
                     @error('passwordRegister')
@@ -56,7 +56,7 @@
                 </small>
             </div>
             <div class="col-sm-6">
-                <input type="password" class="form-control form-control-user" id=""
+                <input type="password" class="form-control form-control-user" id="" value="{{ old('configPasswordRegister') }}"
                     name="configPasswordRegister" placeholder="Repeat Password">
                 <small class="text-danger form-text ">
                     @error('configPasswordRegister')

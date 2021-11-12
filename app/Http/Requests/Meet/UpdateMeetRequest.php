@@ -4,7 +4,7 @@ namespace App\Http\Requests\Meet;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InsertMeetRequest extends FormRequest
+class UpdateMeetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class InsertMeetRequest extends FormRequest
     {
         return [
             'image_meet_room'=> '',
-            'meetName'=>'required|unique:meet_rooms,name',
+            'meetName'=>'required',
             'meetAddress'=>'required|min:10',
             'meetSeats'=>'required|numeric'
         ];
@@ -35,7 +35,6 @@ class InsertMeetRequest extends FormRequest
     {
         return [
             'meetName.required'=>'Không được bỏ trống Tên Phòng',
-            'meetName.unique'=>'Tên phòng đã tồn tại',
             'meetAddress.required'=>'Không được bỏ trống Địa Chỉ',
             'meetAddress.min'=>'Địa chỉ không hợp lệ',
             'numeric' => 'Hãy nhập số vào đây',

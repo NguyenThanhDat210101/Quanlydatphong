@@ -30,7 +30,7 @@ class BookroomMiddle
 
         foreach($ticket as $item){
             $check_Start = new DateTime($item->start_date);
-          if($startbook->format('Y-m-d H:i:s') ==$check_Start->format('Y-m-d H:i:s') ){
+          if($startbook->format('Y-m-d H:i:s') == $check_Start->format('Y-m-d H:i:s') ){
               $isTrue = false;
           }
         }

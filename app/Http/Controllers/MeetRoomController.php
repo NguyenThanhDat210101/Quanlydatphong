@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Meet\InsertMeetRequest;
+use App\Http\Requests\Meet\UpdateMeetRequest;
 use App\Models\Meet_room;
 use Illuminate\Http\Request;
 
@@ -73,7 +74,7 @@ class MeetRoomController extends Controller
                 ->with('getOneMeet',$getMeet);
     }
 
-    public function updates(InsertMeetRequest $request)
+    public function updates(UpdateMeetRequest $request)
     {
         $name = $request->input('meetName');
         $id = $request->input('meetId');

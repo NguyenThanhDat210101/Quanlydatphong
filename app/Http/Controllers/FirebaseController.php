@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Department;
 use Illuminate\Http\Request;
 
-class DepartmentRestController extends Controller
+class FirebaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class DepartmentRestController extends Controller
      */
     public function index()
     {
-        return Department::all();
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class DepartmentRestController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -36,12 +34,7 @@ class DepartmentRestController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
-            'name'=>$request->input('name'),
-            'status'=>$request->input('status')
-        ];
-
-        return Department::create($data);
+        //
     }
 
     /**
@@ -52,7 +45,7 @@ class DepartmentRestController extends Controller
      */
     public function show($id)
     {
-        return Department::where('id',$id)->first();
+        //
     }
 
     /**
@@ -63,7 +56,7 @@ class DepartmentRestController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -75,11 +68,7 @@ class DepartmentRestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = [
-            'name'=>$request->input('name'),
-            'status'=>$request->input('status')
-        ];
-        return Department::where('id',$id)->update($data);
+        //
     }
 
     /**
@@ -90,6 +79,6 @@ class DepartmentRestController extends Controller
      */
     public function destroy($id)
     {
-        return Department::where('id',$id)->delete();
+        //
     }
 }

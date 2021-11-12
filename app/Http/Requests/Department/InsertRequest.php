@@ -24,7 +24,7 @@ class InsertRequest extends FormRequest
     public function rules()
     {
         return [
-            'nameDepartment'=> 'required|min:6'
+            'nameDepartment'=> 'required|min:6|unique:departments,name'
         ];
     }
 
@@ -32,7 +32,8 @@ class InsertRequest extends FormRequest
     {
         return [
             'required'=>'Không được để trống name',
-            'min'=>'Tên phòng không hợp lệ!'
+            'min'=>'Tên phòng không hợp lệ!',
+            'unique'=>'Tên Phòng Đã Tồn Tại'
         ];
     }
 }
