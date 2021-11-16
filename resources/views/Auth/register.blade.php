@@ -36,7 +36,7 @@
             </small>
         </div>
         <div class="form-group">
-            <input type="email" class="form-control form-control-user" name="emailRegister" id="" value="{{ old('emailRegister') }}"
+            <input type="text" class="form-control form-control-user" name="emailRegister" id="" value="{{ old('emailRegister') }}"
                 placeholder="Email">
             <small class="text-danger form-text">
                 @error('emailRegister')

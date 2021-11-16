@@ -9,7 +9,8 @@ class Meet_room extends Model
 {
     public $guarded = [];
 
-    public function Participation_ticker(){
+    public function Participation_ticker()
+    {
         return $this->hasMany(Participation_ticker::class);
     }
 }

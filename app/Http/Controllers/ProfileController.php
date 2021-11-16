@@ -18,41 +18,44 @@ class ProfileController extends Controller
         $messSuccess = $request->session()->get('messSuccess');
         $messupdate = $request->session()->get('messUpdate');
         return view('User.profile')
-                ->with('user',$user)
-                ->with('messageError',$messError)
-                ->with('messageSuccess',$messSuccess)
-                ->with('messageSuccessProfile',$messupdate);
+            ->with('user', $user)
+            ->with('messageError', $messError)
+            ->with('messageSuccess', $messSuccess)
+            ->with('messageSuccessProfile', $messupdate);
     }
 
     public function updateProfile(ProfileRequest $request)
     {
         $name = $request->input('nameProfile');
         $phone = $request->input('phoneProfile');
-        if($request->hasFile('imageProfile')){
+        $image = Auth::user()->image;
+        if($request->hasFile('imageProfile')) {
             $request->file('imageProfile')->move(
                 'images',
                 $image = $request->imageProfile->getClientOriginalName()
             );
-        }else{
-            $image = Auth::user()->image;
         }
         App_User::find(Auth::id())
-                    ->update([
+                    ->update(
+                        [
                         'phone'=>$phone,
                         'name'=>$name,
                         'image'=>$image
-                    ]);
-        $request->session()->flash('messUpdate','Cập Nhật Thành Công');
+                        ]
+                    );
+        $request->session()->flash('messUpdate', 'Cập Nhật Thành Công');
         return redirect()->route('profile.get');
     }
 
     public function changePassword(ChangeRequest $request)
     {
         $pass = $request->input('configpassword');
-        App_User::find(Auth::id())->update([
+        App_User::find(Auth::id())->update(
+            [
             'password'=>Hash::make($pass)
-        ]);
-        $request->session()->flash('messSuccess','Đổi Mật Khẩu Thành Công');
+            ]
+        );
+        $request->session()->flash('messSuccess', 'Đổi Mật Khẩu Thành Công');
         return redirect()->route('profile.get');
     }
 }
