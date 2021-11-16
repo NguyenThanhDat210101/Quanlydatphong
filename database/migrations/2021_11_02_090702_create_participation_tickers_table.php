@@ -15,12 +15,6 @@ class CreateParticipationTickersTable extends Migration
     {
         Schema::create('participation_tickers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-                $table->foreign('user_id')
-                        ->references('id')
-                        ->on('app__users')
-                        ->onDelete('cascade')
-                        ->onUpdate('cascade');
             $table->unsignedInteger('meet_id');
                 $table->foreign('meet_id')
                         ->references('id')

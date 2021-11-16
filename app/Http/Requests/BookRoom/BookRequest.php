@@ -13,7 +13,7 @@ class BookRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'meetRoom'=>'required|min:1|'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required'=>'Hãy chọn phòng họp bạn cần',
+
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Forgot\ResetpasswordRequest;
 use App\Models\App_User;
 use App\Models\password_reset;
 use Illuminate\Http\Request;
@@ -48,23 +49,33 @@ class ResetPasswordController extends Controller
                 ->with('error',$error);
     }
 
-    public function showResetPasswordForm($token) {
+    public function showResetPasswordForm($token,Request $request) {
         $email = password_reset::where('token',$token)->first()->email;
         if(empty($email)){
             return 'null';
         }
+        $error = $request->session()->get('error');
         return view('Auth.Forgot.resset_password')
                 ->with('token', $token)
-                ->with('email',$email);
+                ->with('email',$email)
+                ->with('error',$error);
      }
 
-     public function resetPassword(Request $request){
+     public function resetPassword(ResetpasswordRequest $request){
         $email = $request->input('emailResetPassword');
         $pass = $request->input('configpassword');
         App_User::where('email',$email)->update([
                 'password'=>Hash::make($pass)
         ]);
-        $request->session()->flash('mess','Đổi mật khẩu thành công <br>
+
+        $emailPassReset = password_reset::where(['email'=>$email])
+        ->first();
+        $token = Str::random(64);
+        $emailPassReset->update([
+            'email' => $email,
+            'token' => $token
+        ]);
+        $request->session()->flash('message','Đổi mật khẩu thành công <br>
                                     Đăng nhập nào');
         return redirect()->route('login.get');
      }

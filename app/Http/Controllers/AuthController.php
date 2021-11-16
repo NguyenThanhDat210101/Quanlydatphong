@@ -15,8 +15,10 @@ class AuthController extends Controller
 {
     public function login(Request $request){
         $errorMess =  $request->session()->get('errorMessage');
+        $email =  $request->session()->get('emailMess');
         return view('Auth.login')
-                ->with('errormessage',$errorMess);
+                ->with('errormessage',$errorMess)
+                ->with('email',$email);
     }
 
     public function register(Request $request){
@@ -37,6 +39,7 @@ class AuthController extends Controller
     }
 
     public function signup(SignupRequest $request){
+
         $email = $request->input('emailRegister');
         $name = $request->input('nameRegister');
         $phone = $request->input('phoneRegister');
@@ -53,6 +56,7 @@ class AuthController extends Controller
            $image = 'Noimage.png';
         }
         App_User::create([
+
             'email'=>$email,
             'name'=>$name,
             'phone'=>$phone,
@@ -69,12 +73,14 @@ class AuthController extends Controller
         $password = $request->input('passwordLogin');
 
         if(Auth::attempt(['email' => $email, 'password' => $password])){
-            return redirect()->route('book-room');
+            return redirect()->route('manager.book.room');
         }
         else{
+            $emailmess = $request->session()->flash('emailMess',$email);
             $errorMess = $request->session()->flash('errorMessage','Sai thông tin đăng nhập');
             return redirect()->route('login.get')
-                            ->with('errormess',$errorMess);
+                            ->with('errormess',$errorMess)
+                            ->with('email',$emailmess);
         }
     }
 

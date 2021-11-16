@@ -2,10 +2,14 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\BookroomMiddle;
+use App\Http\Middleware\ChangepasswordMiddle;
+use App\Http\Middleware\inLoginMiddle;
 use App\Http\Middleware\isLoginMiddleware;
 use App\Http\Middleware\mailMiddle;
 use App\Http\Middleware\RegisterMiddle;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\isResetPasswordMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -68,6 +72,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'registerMiddle'=> RegisterMiddle::class,
         'isLogin'=> isLoginMiddleware::class,
-        'mailMiddle'=> mailMiddle::class
+        'mailMiddle'=> mailMiddle::class,
+        'isConfigPassword'=> isResetPasswordMiddleware::class,
+        'inLogin'=> inLoginMiddle::class,
+        'BookdateMiddle'=>BookroomMiddle::class,
+        'ConfigchangeMiddle'=>ChangepasswordMiddle::class,
     ];
 }

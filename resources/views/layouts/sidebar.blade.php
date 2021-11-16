@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('manager.book.room') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link"  href="{{ route('manager.book.room') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Home</span></a>
     </li>
@@ -29,9 +29,15 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('book-room')}}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Book Room</span></a>
+            <span>Book Room</span>
+        </a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('manager.book.room')}}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Manager Book Room</span>
+        </a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 

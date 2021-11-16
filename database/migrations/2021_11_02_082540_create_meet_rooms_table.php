@@ -15,7 +15,7 @@ class CreateMeetRoomsTable extends Migration
     {
         Schema::create('meet_rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('address');
             $table->boolean('status');
             $table->string('image');

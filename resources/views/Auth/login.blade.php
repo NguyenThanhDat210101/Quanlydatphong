@@ -5,7 +5,7 @@
 <form action="{{ route('signin') }}" method="POST" class="user">
     {{csrf_field()}}
     <div class="form-group">
-        <input type="email" class="form-control form-control-user"
+        <input type="email" class="form-control form-control-user" value="{{ (!empty($email))? $email : $email }}"
             id="exampleInputEmail" aria-describedby="emailHelp"
             placeholder="Enter Email Address..." name="emailLogin">
             <small class="text-danger form-text">

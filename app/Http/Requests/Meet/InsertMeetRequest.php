@@ -25,7 +25,7 @@ class InsertMeetRequest extends FormRequest
     {
         return [
             'image_meet_room'=> '',
-            'meetName'=>'required',
+            'meetName'=>'required|unique:meet_rooms,name',
             'meetAddress'=>'required|min:10',
             'meetSeats'=>'required|numeric'
         ];
@@ -35,6 +35,7 @@ class InsertMeetRequest extends FormRequest
     {
         return [
             'meetName.required'=>'Không được bỏ trống Tên Phòng',
+            'meetName.unique'=>'Tên phòng đã tồn tại',
             'meetAddress.required'=>'Không được bỏ trống Địa Chỉ',
             'meetAddress.min'=>'Địa chỉ không hợp lệ',
             'numeric' => 'Hãy nhập số vào đây',
