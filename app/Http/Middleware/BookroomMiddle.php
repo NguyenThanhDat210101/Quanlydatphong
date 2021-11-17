@@ -39,15 +39,15 @@ class BookroomMiddle
             if($date->format('Y-m-d H:i:s') < $startbook->format('Y-m-d H:i:s')) {
                 return $next($request);
             }
-            else{
-                $request->session()->flash('messError', 'Ngày bạn đã chọn đã qua rồi');
-                return redirect()->back();
-            }
-        }
-        else{
-            $request->session()->flash('messError', 'Lịch đó đã có người đặt rồi');
+
+            $request->session()->flash('messError', 'Ngày bạn đã chọn đã qua rồi');
             return redirect()->back();
+
         }
+
+        $request->session()->flash('messError', 'Lịch đó đã có người đặt rồi');
+        return redirect()->back();
+
 
 
     }

@@ -20,12 +20,10 @@ class UserController extends Controller
         if(empty($name)) {
             return redirect()->route('user.get');
         }
-        else{
-            $user = App_User::where('app__users.name', "like", "%".$name."%")
-                            ->paginate(5);
-        }
+        $user = App_User::where('app__users.name', "like", "%".$name."%")
+                        ->paginate(5);
 
         return view('User.user')
-        ->with('getAllUser', $user);
+                ->with('getAllUser', $user);
     }
 }

@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    function login(Request $request)
     {
         $errorMess =  $request->session()->get('errorMessage');
         return view('Auth.login')
-            ->with('errormessage', $errorMess);
+           ->with('errormessage', $errorMess);
     }
 
-    public function register(Request $request)
+    function register(Request $request)
     {
         $departments = Department::all();
         $errorMess =  $request->session()->get('errorMessage');
@@ -30,17 +30,17 @@ class AuthController extends Controller
             ->with('errormess', $errorMess);
     }
 
-    public function forgot()
+    function forgot()
     {
         return view('Auth.forgot');
     }
 
-    public function test()
+    function test()
     {
         return view('tesst');
     }
 
-    public function signup(SignupRequest $request)
+    function signup(SignupRequest $request)
     {
         $email = $request->input('emailRegister');
         $name = $request->input('nameRegister');
@@ -69,7 +69,7 @@ class AuthController extends Controller
         return redirect()->route('login.get');
     }
 
-    public function signin(SigninRequest $request)
+    function signin(SigninRequest $request)
     {
         $email = $request->input('emailLogin');
         $password = $request->input('passwordLogin');
@@ -77,14 +77,13 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect()->route('manager.book.room');
         }
-        else{
-            $errorMess = $request->session()->flash('errorMessage', 'Sai thông tin đăng nhập');
-            return redirect()->route('login.get')
-                ->with('errormess', $errorMess);
-        }
+
+        return redirect()->route('login.get')
+            ->with('errormess', $request->session()->flash('errorMessage', 'Sai thông tin đăng nhập'));
+
     }
 
-    public function logOut()
+    function logOut()
     {
         Auth::logout();
         return redirect()->route('login.get');

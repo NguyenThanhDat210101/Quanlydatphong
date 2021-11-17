@@ -20,8 +20,8 @@ class isLoginMiddleware
         if(Auth::check()) {
             return $next($request);
         }
-        else{
-            return redirect()->route('login.get');
-        }
+
+        return redirect()->route('login.get');
+
     }
 }

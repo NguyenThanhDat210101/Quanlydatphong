@@ -22,10 +22,9 @@ class RegisterMiddle
         if($pass == $config) {
             return $next($request);
         }
-        else{
-            $errorMess =  $request->session()->flash('errorMessage', 'Mật Khẩu và xác nhận mật khẩu không giống nhau');
-            return redirect()->route('register.get')
-                ->with('errormess', $errorMess);
-        }
+        $errorMess =  $request->session()->flash('errorMessage', 'Mật Khẩu và xác nhận mật khẩu không giống nhau');
+        return redirect()->route('register.get')
+            ->with('errormess', $errorMess);
+
     }
 }

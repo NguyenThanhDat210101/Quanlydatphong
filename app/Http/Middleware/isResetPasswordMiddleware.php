@@ -22,12 +22,11 @@ class isResetPasswordMiddleware
         if($newpass == $config) {
             return $next($request);
         }
-        else{
-            $email = $request->input('emailResetPassword');
-            $emailPassReset = password_reset::where(['email'=>$email])->first();
-            $request->session()->flash('error', 'Mật Khẩu và xác nhận không khớp với nhau');
 
-            return redirect()->route('reset.password.get', ['token'=>$emailPassReset->token]);
-        }
+        $email = $request->input('emailResetPassword');
+        $emailPassReset = password_reset::where(['email'=>$email])->first();
+        $request->session()->flash('error', 'Mật Khẩu và xác nhận không khớp với nhau');
+        return redirect()->route('reset.password.get', ['token'=>$emailPassReset->token]);
+
     }
 }

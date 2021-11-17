@@ -18,11 +18,11 @@ class adminMiddle
      */
     public function handle(Request $request, Closure $next)
     {
-            $user = Auth::user();
+        $user = Auth::user();
         if($user->email == 'admin' && Hash::check('admin', $user->password)) {
             return $next($request);
-        }else{
-            return redirect()->route('error.get');
         }
+        return redirect()->route('error.get');
+
     }
 }

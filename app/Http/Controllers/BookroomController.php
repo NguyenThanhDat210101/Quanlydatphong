@@ -50,12 +50,10 @@ class BookroomController extends Controller
         if(empty($name)) {
             return redirect()->route('manager.book.room');
         }
-        else{
-            $allBook = Participation_ticker::join('meet_rooms', 'participation_tickers.meet_id', '=', 'meet_rooms.id')
-                ->where('meet_rooms.name', "like", "%".$name."%")
-                ->paginate(5);
-        }
 
+        $allBook = Participation_ticker::join('meet_rooms', 'participation_tickers.meet_id', '=', 'meet_rooms.id')
+            ->where('meet_rooms.name', "like", "%".$name."%")
+            ->paginate(5);
         return view('BookRoom.manager-book-room')
         ->with('allBook', $allBook);
 

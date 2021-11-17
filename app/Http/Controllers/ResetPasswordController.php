@@ -18,24 +18,10 @@ class ResetPasswordController extends Controller
         $user = App_User::where('email', $email)->first();
         $token = Str::random(64);
 
-        $emailPassReset = password_reset::where(['email'=>$email])
-                                        ->first();
-        if(!empty($emailPassReset)) {
-            $emailPassReset->update(
-                [
-                'email' => $user->email,
-                'token' => $token
-                ]
-            );
-        }
-        else{
-            password_reset::create(
-                [
-                'email' => $user->email,
-                'token' => $token
-                ]
-            );
-        }
+        Password_reset::updateOrCreate(
+            ['email' => $user->email],
+            ['token' => $token]
+        );
 
         Mail::send(
             'Auth.Forgot.message', ['token' => $token], function ($message) use ($request) {

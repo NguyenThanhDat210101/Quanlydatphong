@@ -23,11 +23,9 @@ class DepartmentController extends Controller
         if(empty($name)) {
             return redirect()->route('department.get');
         }
-        else{
-            $department = Department::where('name', "like", "%".$name."%")
-            ->paginate(5);
-        }
 
+        $department = Department::where('name', "like", "%".$name."%")
+                                ->paginate(5);
         return view('Department.department')
             ->with('department', $department);
 

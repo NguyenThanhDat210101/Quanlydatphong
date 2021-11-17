@@ -26,14 +26,15 @@ class ChangepasswordMiddle
             if($newpass == $configpass) {
                 return $next($request);
             }
-            else{
-                $request->session()->flash('messError', 'Xác nhận mật khẩu thất bại');
-                return redirect()->route('profile.get');
-            }
-        }else{
-            $request->session()->flash('messError', 'Mật khẩu hiện tại của bạn không đúng');
+
+            $request->session()->flash('messError', 'Xác nhận mật khẩu thất bại');
             return redirect()->route('profile.get');
+
         }
+
+        $request->session()->flash('messError', 'Mật khẩu hiện tại của bạn không đúng');
+        return redirect()->route('profile.get');
+
 
     }
 }

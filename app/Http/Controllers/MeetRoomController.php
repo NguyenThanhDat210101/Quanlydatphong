@@ -24,11 +24,9 @@ class MeetRoomController extends Controller
         if(empty($name)) {
             return redirect()->route('meetroom.get');
         }
-        else{
-            $meet = Meet_room::where('name', "like", "%".$name."%")
-            ->paginate(5);
-        }
 
+        $meet = Meet_room::where('name', "like", "%".$name."%")
+                        ->paginate(5);
         return view('MeetRoom.meet_room')
             ->with('getAllMeet', $meet);
     }
@@ -38,15 +36,13 @@ class MeetRoomController extends Controller
         $name = $request->input('meetName');
         $address = $request->input('meetAddress');
         $seats = $request->input('meetSeats');
+        $images = 'Noimage.png';
 
         if($request->hasFile('image_meet_room')) {
             $request->file('image_meet_room')->move(
                 'images',
                 $images = $request->image_meet_room->getClientOriginalName()
             );
-        }
-        else{
-            $images = 'Noimage.png';
         }
 
         Meet_room::create(
@@ -84,15 +80,14 @@ class MeetRoomController extends Controller
         $address = $request->input('meetAddress');
         $seats = $request->input('meetSeats');
         $meetRoom = Meet_room::find($id);
+        $images = $meetRoom->image;
         if($request->hasFile('image_meet_room')) {
             $request->file('image_meet_room')->move(
                 'images',
                 $images = $request->image_meet_room->getClientOriginalName()
             );
         }
-        else{
-            $images = $meetRoom->image;
-        }
+
         $meetRoom->update(
             [
             'name'=>$name,
