@@ -106,7 +106,7 @@
         var url = window.location.pathname;
         var meetId = url.split('/')[2];
         $.ajax({
-            url:'http://manager-book-room.herokuapp.com/api/getAllPartTicket/'+meetId,
+            url:'http://localhost:8000/api/getAllPartTicket/'+meetId,
             type: 'GET',
             success:function(e){
                 $('#mydate').change(function() {
