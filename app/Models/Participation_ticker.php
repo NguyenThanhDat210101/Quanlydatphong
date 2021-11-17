@@ -9,11 +9,13 @@ class Participation_ticker extends Model
 {
     public $guarded = [];
 
-    public function Participation_Ticker_Detail(){
+    public function Participation_Ticker_Detail()
+    {
         return $this->hasMany(Participation_Ticket_Detail::class);
     }
 
-    public function Meet_room(){
-        return $this->belongsTo(Meet_room::class,'meet_id','id');
+    public function Meet_room()
+    {
+        return $this->belongsTo(Meet_room::class, 'meet_id', 'id');
     }
 }

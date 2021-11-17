@@ -6,57 +6,61 @@ use App\Http\Requests\Login\SigninRequest;
 use App\Models\App_User;
 use App\Models\Department;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Register\SignupRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login(Request $request){
-        $errorMess =  $request->session()->get('errorMessage');
-        $email =  $request->session()->get('emailMess');
-        return view('Auth.login')
-                ->with('errormessage',$errorMess)
-                ->with('email',$email);
+    protected $app_user;
+    protected $getdepartment;
+
+    public function __construct(App_User $app_user,Department $getdepartment)
+    {
+        $this->app_user = $app_user;
+        $this->getdepartment = $getdepartment;
     }
 
-    public function register(Request $request){
-        $departments = Department::all();
+
+    function login(Request $request)
+    {
+        $errorMess =  $request->session()->get('errorMessage');
+        return view('Auth.login')
+           ->with('errormessage', $errorMess);
+    }
+
+    function register(Request $request)
+    {
+        $departments = $this->getdepartment->all();
         $errorMess =  $request->session()->get('errorMessage');
         return view('Auth.register')
-                ->with('photos','Noimage.png')
-                ->with('departmentGetAll',$departments)
-                ->with('errormess',$errorMess);
+            ->with('photos', 'Noimage.png')
+            ->with('departmentGetAll', $departments)
+            ->with('errormess', $errorMess);
     }
 
-    public function forgot(){
+    function forgot()
+    {
         return view('Auth.forgot');
     }
 
-    public function test(){
-        return view('tesst');
-    }
-
-    public function signup(SignupRequest $request){
-
+    function signup(SignupRequest $request)
+    {
         $email = $request->input('emailRegister');
         $name = $request->input('nameRegister');
         $phone = $request->input('phoneRegister');
         $cmnd = $request->input('cmndRegister');
         $config = $request->input('configPasswordRegister');
         $department = $request->input('departmentRegister');
-        if($request->hasFile('photoRegister')){
+        $image = 'Noimage.png';
+        if($request->hasFile('photoRegister')) {
             $request->file('photoRegister')->move(
                 'images',
                 $image = $request->photoRegister->getClientOriginalName()
             );
         }
-        else{
-           $image = 'Noimage.png';
-        }
-        App_User::create([
-
+        $this->app_user->create(
+            [
             'email'=>$email,
             'name'=>$name,
             'phone'=>$phone,
@@ -64,27 +68,27 @@ class AuthController extends Controller
             'password'=>Hash::make($config),
             'image'=>$image,
             'department_Id'=>$department
-        ]);
+            ]
+        );
         return redirect()->route('login.get');
     }
 
-    public function signin(SigninRequest $request){
+    function signin(SigninRequest $request)
+    {
         $email = $request->input('emailLogin');
         $password = $request->input('passwordLogin');
 
-        if(Auth::attempt(['email' => $email, 'password' => $password])){
+        if(Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect()->route('manager.book.room');
         }
-        else{
-            $emailmess = $request->session()->flash('emailMess',$email);
-            $errorMess = $request->session()->flash('errorMessage','Sai thông tin đăng nhập');
-            return redirect()->route('login.get')
-                            ->with('errormess',$errorMess)
-                            ->with('email',$emailmess);
-        }
+
+        return redirect()->route('login.get')
+            ->with('errormess', $request->session()->flash('errorMessage', 'Sai thông tin đăng nhập'));
+
     }
 
-    public function logOut(){
+    function logOut()
+    {
         Auth::logout();
         return redirect()->route('login.get');
     }

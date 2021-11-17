@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class particketController extends Controller
 {
-    public function getAll($id){
-        return Participation_ticker::where('meet_id',$id)->get();
+    public function getAll($id)
+    {
+        return Participation_ticker::where('meet_id', $id)->get();
     }
 }
