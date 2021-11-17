@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class inLoginMiddle
 {
+    protected $auth;
+
+    public function __construct(Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
+
     /**
      * Handle an incoming request.
      *
@@ -17,7 +25,7 @@ class inLoginMiddle
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()) {
+        if($this->auth::check()) {
             return redirect()->back();
         }
         return $next($request);

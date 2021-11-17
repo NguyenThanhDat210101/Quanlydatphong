@@ -130,13 +130,13 @@ Route::get('search-ticket','App\Http\Controllers\BookroomController@search')
 Route::get('join-user/{id}','App\Http\Controllers\JoinUserController@viewJoin')
 ->middleware('isLogin')
 ->name('join.user.get');
-Route::post('add-user','App\Http\Controllers\JoinUserController@joinUser')
+Route::post('add-user','App\Http\Controllers\numberJoinController@joinUser')
 ->middleware('isLogin')
 ->name('join.user.post');
-Route::get('is-join-user/{id}','App\Http\Controllers\JoinUserController@viewNumberJoin')
+Route::get('is-join-user/{id}','App\Http\Controllers\numberJoinController@viewNumberJoin')
 ->middleware('isLogin')
 ->name('is.join.user');
-Route::get('delete-join-user/{id}','App\Http\Controllers\JoinUserController@deleteUserJoin')
+Route::get('delete-join-user/{id}','App\Http\Controllers\numberJoinController@deleteUserJoin')
 ->middleware('isLogin')
 ->name('delete.join.user');
 

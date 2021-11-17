@@ -6,13 +6,22 @@ use App\Http\Requests\Login\SigninRequest;
 use App\Models\App_User;
 use App\Models\Department;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Register\SignupRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    protected $app_user;
+    protected $getdepartment;
+
+    public function __construct(App_User $app_user,Department $getdepartment)
+    {
+        $this->app_user = $app_user;
+        $this->getdepartment = $getdepartment;
+    }
+
+
     function login(Request $request)
     {
         $errorMess =  $request->session()->get('errorMessage');
@@ -22,7 +31,7 @@ class AuthController extends Controller
 
     function register(Request $request)
     {
-        $departments = Department::all();
+        $departments = $this->getdepartment->all();
         $errorMess =  $request->session()->get('errorMessage');
         return view('Auth.register')
             ->with('photos', 'Noimage.png')
@@ -33,11 +42,6 @@ class AuthController extends Controller
     function forgot()
     {
         return view('Auth.forgot');
-    }
-
-    function test()
-    {
-        return view('tesst');
     }
 
     function signup(SignupRequest $request)
@@ -55,7 +59,7 @@ class AuthController extends Controller
                 $image = $request->photoRegister->getClientOriginalName()
             );
         }
-        App_User::create(
+        $this->app_user->create(
             [
             'email'=>$email,
             'name'=>$name,

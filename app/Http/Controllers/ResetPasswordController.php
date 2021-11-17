@@ -12,13 +12,23 @@ use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
+    protected $auth;
+    protected $password_reset;
+    protected $str;
+
+    public function __construct( App_User $app_User, password_reset $password_reset,Str $str)
+    {
+        $this->app_User = $app_User;
+        $this->password_reset = $password_reset;
+        $this->str = $str;
+    }
     public function sendMail(Request $request)
     {
         $email = $request->input('emailForgot');
-        $user = App_User::where('email', $email)->first();
-        $token = Str::random(64);
+        $user = $this->app_User->where('email', $email)->first();
+        $token = $this->str->random(64);
 
-        Password_reset::updateOrCreate(
+        $this->password_reset->updateOrCreate(
             ['email' => $user->email],
             ['token' => $token]
         );
@@ -45,7 +55,7 @@ class ResetPasswordController extends Controller
 
     public function showResetPasswordForm($token,Request $request)
     {
-        $email = password_reset::where('token', $token)->first()->email;
+        $email = $this->password_reset->where('token', $token)->first()->email;
         if(empty($email)) {
             return 'null';
         }
@@ -60,15 +70,15 @@ class ResetPasswordController extends Controller
     {
         $email = $request->input('emailResetPassword');
         $pass = $request->input('configpassword');
-        App_User::where('email', $email)->update(
+        $this->app_User->where('email', $email)->update(
             [
                'password'=>Hash::make($pass)
             ]
         );
 
-        $emailPassReset = password_reset::where(['email'=>$email])
-        ->first();
-        $token = Str::random(64);
+        $emailPassReset = $this->password_reset->where(['email'=>$email])
+            ->first();
+        $token = $this->str->random(64);
         $emailPassReset->update(
             [
             'email' => $email,

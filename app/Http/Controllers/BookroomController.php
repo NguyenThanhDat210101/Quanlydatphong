@@ -7,6 +7,7 @@ use App\Http\Requests\BookRoom\BookRequest;
 use App\Models\App_User;
 use App\Models\Meet_room;
 use App\Models\Participation_ticker;
+use App\Repositories\Interface\TicketRepositoryInterface;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
@@ -14,10 +15,20 @@ use Illuminate\Support\Facades\DB;
 
 class BookroomController extends Controller
 {
+    protected $ticketRepository;
+    protected $get_meet_room;
+
+    public function __construct(TicketRepositoryInterface $ticketRepository,Meet_room $get_meet_room)
+    {
+        $this->ticketRepository = $ticketRepository;
+        $this->get_meet_room = $get_meet_room;
+
+    }
+
     public function index()
     {
-        $meet = Meet_room::all();
-        $meetTable = Meet_room::paginate(6);
+        $meet = $this->get_meet_room->all();
+        $meetTable = $this->get_meet_room->paginate(6);
 
         return view('BookRoom.room')
             ->with('getMeet', $meet)
@@ -38,7 +49,7 @@ class BookroomController extends Controller
 
     public function viewManager()
     {
-        $allBook = Participation_ticker::paginate(5);
+        $allBook = $this->ticketRepository->paginate(5);
 
         return view('BookRoom.manager-book-room')
                 ->with('allBook', $allBook);
@@ -78,7 +89,7 @@ class BookroomController extends Controller
         $startbook = $request->input('datebook').' '. $startHour;
         $endbook = $request->input('datebook').' '. $endHour;
 
-        Participation_ticker::create(
+        $this->ticketRepository->create(
             [
             'meet_id'=>$meet,
             'book_date'=>$date->format('Y-m-d H:i'),
@@ -92,7 +103,7 @@ class BookroomController extends Controller
 
     public function deletes($id)
     {
-        Participation_ticker::find($id)->delete();
+        $this->ticketRepository->find($id)->delete();
         return redirect()->route('manager.book.room');
     }
 }

@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Meet\InsertMeetRequest;
 use App\Http\Requests\Meet\UpdateMeetRequest;
 use App\Models\Meet_room;
+use App\Repositories\Interface\MeetroomRepositoryInterface;
 use Illuminate\Http\Request;
 
 class MeetRoomController extends Controller
 {
+    protected $meetRepository;
+
+    public function __construct(MeetroomRepositoryInterface $meetRepo)
+    {
+        $this->meetRepository = $meetRepo;
+    }
     public function index(Request $request)
     {
-        $meet = Meet_room::paginate(5);
+        $meet = $this->meetRepository->paginate(5);
         $message = $request->session()->get('message');
         return view('MeetRoom.meet_room')
             ->with('getAllMeet', $meet)
@@ -45,7 +52,7 @@ class MeetRoomController extends Controller
             );
         }
 
-        Meet_room::create(
+        $this->meetRepository->create(
             [
             'name'=>$name,
             'address'=>$address,
@@ -60,14 +67,14 @@ class MeetRoomController extends Controller
 
     public function deletes($id)
     {
-        Meet_room::find($id)->delete();
+        $this->meetRepository->find($id)->delete();
         return redirect()->route('meetroom.get');
     }
 
     public function edits($id)
     {
-        $meet = Meet_room::paginate(5);
-        $getMeet =  Meet_room::find($id);
+        $meet = $this->meetRepository->paginate(5);
+        $getMeet =  $this->meetRepository->find($id);
         return view('MeetRoom.edit_meet_room')
             ->with('getAllMeet', $meet)
             ->with('getOneMeet', $getMeet);
@@ -79,7 +86,7 @@ class MeetRoomController extends Controller
         $id = $request->input('meetId');
         $address = $request->input('meetAddress');
         $seats = $request->input('meetSeats');
-        $meetRoom = Meet_room::find($id);
+        $meetRoom = $this->meetRepository->find($id);
         $images = $meetRoom->image;
         if($request->hasFile('image_meet_room')) {
             $request->file('image_meet_room')->move(

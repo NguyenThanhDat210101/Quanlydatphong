@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class isLoginMiddleware
 {
+
+    // protected $auths;
+
+    // public function __construct(Auth $auths)
+    // {
+    //     $this->auths = $auths;
+    // }
     /**
      * Handle an incoming request.
      *

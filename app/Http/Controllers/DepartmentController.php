@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Department\InsertRequest;
 use App\Models\Department;
+use App\Repositories\Interface\DepartmentRepositoryInterface;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    protected $departRepository;
+
+    public function __construct(DepartmentRepositoryInterface $departReposi)
+    {
+        $this->departRepository = $departReposi;
+    }
+
     public function index(Request $request)
     {
-        $department = Department::paginate(5);
+        $department = $this->departRepository->paginate(5);
         $message = $request->session()->get('message');
         return view('Department.department')
             ->with('department', $department)
@@ -34,7 +42,7 @@ class DepartmentController extends Controller
     public function inserts(InsertRequest $request)
     {
         $name = $request->input('nameDepartment');
-        Department::create(
+        $this->departRepository->create(
             [
             'name'=>$name,
             'status'=>true
@@ -46,8 +54,8 @@ class DepartmentController extends Controller
 
     public function edits($id)
     {
-        $getDepart =  Department::find($id);
-        $department = Department::paginate(5);
+        $getDepart =  $this->departRepository->find($id);
+        $department = $this->departRepository->paginate(5);
         return view('Department.edit-department')
             ->with('getDepart', $getDepart)
             ->with('department', $department);;
@@ -57,7 +65,7 @@ class DepartmentController extends Controller
     {
         $name = $request->input('nameEditDepartment');
         $id = $request->input('idEditDepartment');
-        Department::find($id)->update(
+        $this->departRepository->find($id)->update(
             [
             'name'=>$name
             ]
@@ -68,7 +76,7 @@ class DepartmentController extends Controller
 
     public function deletes(Request $request,$id)
     {
-        Department::find($id)->delete();
+        $this->departRepository->find($id)->delete();
         $request->session()->flash('message', 'Xóa Thành Công');
         return redirect()->route('department.get');
     }

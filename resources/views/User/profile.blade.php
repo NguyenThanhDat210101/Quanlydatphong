@@ -1,5 +1,5 @@
 @extends('main')
-@section('namePage','Department')
+@section('namePage','Profile')
 @section('content')
 <div class="row">
     {{-- Crud --}}
