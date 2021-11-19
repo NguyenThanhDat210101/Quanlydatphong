@@ -9,11 +9,18 @@ class App_User extends Model
 {
     public $guarded = [];
 
-    public function Participation_Ticker_Detail(){
+    public function Participation_Ticker_Detail()
+    {
         return $this->hasMany(Participation_Ticket_Detail::class);
     }
 
-    public function Department(){
-        return $this->belongsTo(Department::class,'department_Id','id');
+    public function Department()
+    {
+        return $this->belongsTo(Department::class, 'department_Id', 'id');
+    }
+
+    public function role_user()
+    {
+        return $this->hasMany(role_user::class);
     }
 }

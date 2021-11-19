@@ -13,50 +13,50 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $errorMess =  $request->session()->get('errorMessage');
-        $email =  $request->session()->get('emailMess');
         return view('Auth.login')
-                ->with('errormessage',$errorMess)
-                ->with('email',$email);
+            ->with('errormessage', $errorMess);
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $departments = Department::all();
         $errorMess =  $request->session()->get('errorMessage');
         return view('Auth.register')
-                ->with('photos','Noimage.png')
-                ->with('departmentGetAll',$departments)
-                ->with('errormess',$errorMess);
+            ->with('photos', 'Noimage.png')
+            ->with('departmentGetAll', $departments)
+            ->with('errormess', $errorMess);
     }
 
-    public function forgot(){
+    public function forgot()
+    {
         return view('Auth.forgot');
     }
 
-    public function test(){
+    public function test()
+    {
         return view('tesst');
     }
 
-    public function signup(SignupRequest $request){
-
+    public function signup(SignupRequest $request)
+    {
         $email = $request->input('emailRegister');
         $name = $request->input('nameRegister');
         $phone = $request->input('phoneRegister');
         $cmnd = $request->input('cmndRegister');
         $config = $request->input('configPasswordRegister');
         $department = $request->input('departmentRegister');
-        if($request->hasFile('photoRegister')){
+        $image = 'Noimage.png';
+        if($request->hasFile('photoRegister')) {
             $request->file('photoRegister')->move(
                 'images',
                 $image = $request->photoRegister->getClientOriginalName()
             );
         }
-        else{
-           $image = 'Noimage.png';
-        }
-        App_User::create([
-
+        App_User::create(
+            [
             'email'=>$email,
             'name'=>$name,
             'phone'=>$phone,
@@ -64,27 +64,28 @@ class AuthController extends Controller
             'password'=>Hash::make($config),
             'image'=>$image,
             'department_Id'=>$department
-        ]);
+            ]
+        );
         return redirect()->route('login.get');
     }
 
-    public function signin(SigninRequest $request){
+    public function signin(SigninRequest $request)
+    {
         $email = $request->input('emailLogin');
         $password = $request->input('passwordLogin');
 
-        if(Auth::attempt(['email' => $email, 'password' => $password])){
+        if(Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect()->route('manager.book.room');
         }
         else{
-            $emailmess = $request->session()->flash('emailMess',$email);
-            $errorMess = $request->session()->flash('errorMessage','Sai thông tin đăng nhập');
+            $errorMess = $request->session()->flash('errorMessage', 'Sai thông tin đăng nhập');
             return redirect()->route('login.get')
-                            ->with('errormess',$errorMess)
-                            ->with('email',$emailmess);
+                ->with('errormess', $errorMess);
         }
     }
 
-    public function logOut(){
+    public function logOut()
+    {
         Auth::logout();
         return redirect()->route('login.get');
     }

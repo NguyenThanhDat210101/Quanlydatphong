@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class isLoginMiddleware
+class adminMiddle
 {
     /**
      * Handle an incoming request.
@@ -17,11 +18,11 @@ class isLoginMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()) {
+            $user = Auth::user();
+        if($user->email == 'admin' && Hash::check('admin', $user->password)) {
             return $next($request);
-        }
-        else{
-            return redirect()->route('login.get');
+        }else{
+            return redirect()->route('error.get');
         }
     }
 }

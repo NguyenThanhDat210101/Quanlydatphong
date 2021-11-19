@@ -9,7 +9,8 @@ class Department extends Model
 {
     public $guarded = [];
 
-    public function App_User(){
+    public function App_User()
+    {
         return $this->hasMany(App_User::class);
     }
 }
